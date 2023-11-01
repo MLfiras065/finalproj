@@ -12,72 +12,35 @@ import Category from './Category';
 const CategoryDetails = ({navigation,onpress,populare}) => {
 const route=useRoute()
 const {item}=route.params
-const countries = [
-    {
-      id:555,
-      name: "Italy",
-      reasons: "Rich historyBeautiful landscapesIconic landmarks",
-      desc: "Diverse wildlifeFriendly locals hjjjjjjjjjl",
-      image: "https://c0.wallpaperflare.com/preview/84/359/653/arch-architectural-architecture-art.jpg",
-      populare:{
-        id: 64,
-        reasoqns: "Modeqrn and World-class technology",
-        dqesc: "Diversqqe wildlifeFrienssdly locals hjjjjjjjjjl",
-    }
-    },
-    {
-      id: 66,
-      name: "Japan",
-      reasons: "Modern and World-class technology",
-      desc: "Diverse wildlifeFriendly locals hjjjjjjjjjl",
-      image: "https://c0.wallpaperflare.com/preview/117/565/297/japan-%E6%B8%8B%E8%B0%B7%E5%8C%BA-shibuya-crossing.jpg",
-    populare:{
-        id: 4,
-        reasoqns: "Modern and World-class technology",
-        dqesc: "Diverse wildlifeFrienssdly locals hjjjjjjjjjl",
-    }
-    },
-    {
-      id: 774,
-      name: "Australia",
-      reasons: "Diverse wildlifeFriendly locals",
-      desc: "Diverse wildlifeFriendly locals hjjjjjjjjjl",
-      image: "https://c0.wallpaperflare.com/preview/476/345/212/grey-concrete-bridge-near-body-of-water.jpg",
-      populare:{
-        id: 3,
-        reasoqns: "Modern and World-cuuulass technology",
-        dqesc: "Diverse wildlifeFrienssdly locals hjjjjjjjjjl",
-    }
-    },
- 
-  ];
+console.log("catitem",item);
+
  
 return (
   
       <ScrollView>
         <View>
             <ResImage
-            source={countries.image}
+            source={item.image}
             width={"100"}
             height={350}
             radius={30}
 />
 <Header
-title={countries.name} color={"white"} icon={"search1"}
+title={item.name} color={"white"} icon={"search1"}
 onPress={()=>navigation.goBack()}
 // onPress1={()=>navigation.navigate("Search")}
 />
         </View>
         <View style={styles.desc}>
         <ReausbleText
-    text={countries.reasons}
+    text={item.reasons}
     family={"medium"}
     size={22}
     color={"black"}
 
     />
     <DescText
-    text={countries.desc}
+    text={item.desc}
     lines={3}
     
     />
@@ -98,7 +61,7 @@ onPress={()=>navigation.goBack()}
     </TouchableOpacity>
 
 </View>
-<Category data={countries.populare} />
+<Category data={item.populare} />
       <TouchableOpacity onPress={()=>navigation.navigate("ListSearch",{ populare: countries.populare })} style={styles.btnstyle}>
       <Text style={styles.btntext}>hotels</Text>
     </TouchableOpacity>

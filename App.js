@@ -1,11 +1,12 @@
 
 import { StyleSheet, Text, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { OnBording, Search,Recomended, Detalies, BestOf, List, ListSearch, DeataliesList, TopBookings, CategoryDetails, Category, AuthTopTab } from "./screens";
+import { OnBording, Search,Recomended, Detalies, BestOf, List, ListSearch, DeataliesList, TopBookings, CategoryDetails, Category, AuthTopTab ,Booking,Booked, Sucess} from "./screens";
 import { NavigationContainer } from "@react-navigation/native";
 import Navigation from "./screens/Navigation";
 import Header from "./components/Header";
 import TopTab from "./screens/TopTab";
+import BottomSheet from "./screens/BottomSheet";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -75,6 +76,26 @@ export default function App() {
           <Stack.Screen
           name="AuthTopTab"
           component={AuthTopTab}
+          options={{ headerShown: false }}
+        />
+          <Stack.Screen
+          name="Booking"
+          component={Booking}
+          options={{ headerShown: false }}
+        />
+          <Stack.Screen
+          name="Booked"
+          component={Booked}
+          options={{ headerShown: false }}
+        />
+          <Stack.Screen
+          name="Sucess"
+          component={Sucess}
+          options={{ headerShown: false }}
+        />
+          <Stack.Screen
+          name="BottomSheet"
+          component={BottomSheet}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

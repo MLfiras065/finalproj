@@ -72,7 +72,7 @@ const BestOf = () => {
     keyExtractor={(item)=> item.id.toString()}
     renderItem={({item})=>(
 <DataCard item={item} margin={10} 
- onPress={()=>navigation.navigate('DeataliesList')}
+ onPress={()=>navigation.navigate('Booking')}
  />
     )}
     />

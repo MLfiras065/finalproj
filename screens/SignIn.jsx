@@ -80,16 +80,7 @@ const SignIn = () => {
     </View>
   )
 }
-  {/* 
-          <TextInput
-            onChangeText={handleChange('password')}
-            onBlur={handleBlur('password')}
-            value={values.password}
-            placeholder="Password"
-            secureTextEntry
-          /> */}
-          
-          {/* <Button title="Submit" onPress={handleSubmit} /> */}
+
 export default SignIn
 
 const styles = StyleSheet.create({
