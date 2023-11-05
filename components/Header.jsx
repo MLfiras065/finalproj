@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import ReausbleText from './ReausbleText'
+import ResImage from './ResImage'
 const Header = ({color,title,onPress,onPress1,icon}) => {
   return (
     <View style={styles.overlaye}>
@@ -14,6 +15,7 @@ name='left'
 size={24}
 />
 </TouchableOpacity>
+
 <ReausbleText
   text={title}
   family={"medium"}

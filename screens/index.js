@@ -1,5 +1,5 @@
 import OnBording from "./OnBording";
-import Chat from "./Chat";
+import ChatScreen from "./ChatScreen";
 import Home from "./Home";
 import Location from "./Location";
 import Profile from "./Profile";
@@ -21,9 +21,13 @@ import AuthTopTab from "./AuthTopTab";
 import Booked from "./Booked";
 import Booking from "./Booking";
 import Sucess from "./Sucess";
+import Rooms from "./Rooms";
+import ChatMessage from "./ChatMessage";
 
 
 export {
+  ChatMessage,
+  Rooms,
   Sucess,
   Booking,
   Booked,
@@ -36,7 +40,7 @@ export {
   TopInfo,
   TopBookings,
   OnBording,
-  Chat,
+  ChatScreen,
   Home,
   Profile,
   Location,

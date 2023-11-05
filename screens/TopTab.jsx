@@ -54,9 +54,9 @@ source={{ uri: 'https://c4.wallpaperflare.com/wallpaper/365/244/884/uchiha-itach
 </View>
 </View>
     <Tab.Navigator>
-    <Tab.Screen name="TopBookings" component={TopBookings} />
-    <Tab.Screen name="TopInfo" component={TopInfo} />
-    <Tab.Screen name="TopTrips" component={TopTrips} />
+    <Tab.Screen name="Top Bookings" component={TopBookings} />
+    <Tab.Screen name="Top Trips" component={TopTrips} />
+    <Tab.Screen name="Info" component={TopInfo} />
   </Tab.Navigator>
     </View>
   )

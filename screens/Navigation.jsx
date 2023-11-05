@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Chat,Home,AuthTopTab } from '../screens/index';
+import { ChatScreen,Home,AuthTopTab } from '../screens/index';
 import {Ionicons} from '@expo/vector-icons';
 import TopTab from "./TopTab";
+
 const Tab = createBottomTabNavigator();
 const tabBarStyle = {
   padding: 5,
@@ -42,10 +43,10 @@ const Navigation = () => {
     }
     }
      />
-     <Tab.Screen name="Chat" component={Chat}  options=
+     <Tab.Screen name="ChatScreen" component={ChatScreen}  options=
      {{tabBarStyle:tabBarStyle,
     tabBarShowLabel:false,
-    headerShown:false,
+    // headerShown:false,
     tabBarIcon:({focused})=>(
         <Ionicons
         name={focused?"chatbubble-ellipses":"chatbubble-ellipses-outline"}

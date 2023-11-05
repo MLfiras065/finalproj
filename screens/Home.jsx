@@ -6,16 +6,20 @@ import { useNavigation } from '@react-navigation/native'
 import Places from '../components/Places'
 import Recommondation from './Recommondation'
 import BestOf from './BestOf'
-import BottomSheet from "../screens/BottomSheet"
+// import BottomSheet from "../screens/BottomSheet"
+import Modal from 'react-native-modal'
 const Home = () => {
+  const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
+
+  const toggleBottomSheet = () => {
+    setBottomSheetVisible(!isBottomSheetVisible);
+  };
+
+  const closeBottomSheet = () => {
+    setBottomSheetVisible(false);
+  };
     const navigation = useNavigation()
-    const [open, setOpen] = useState(false);
-    const close=()=>{
-      setOpen(false)
-    }
-    const toggleBottomSheet = () => {
-      setOpen(!open);
-    };
+   
     return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -48,13 +52,29 @@ size={24}
       
       
             <BestOf/>
-      
-            <TouchableOpacity 
-            style={styles.bottomIconContainer}
-            onPress={()=>setOpen(open)}>
-          <Text>open</Text>
-        </TouchableOpacity>
-        <BottomSheet visible={open} close={() => setOpen(false)} />
+            <TouchableOpacity
+        style={styles.bottomIconContainer}
+        onPress={toggleBottomSheet}
+      >
+        <AntDesign name="caretdown" size={24} color="white" />
+      </TouchableOpacity>
+            <Modal
+        isVisible={isBottomSheetVisible}
+        onBackdropPress={closeBottomSheet}
+        backdropOpacity={0.5}
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+        style={styles.bottomSheet}
+      >
+        {/* Content for the bottom sheet */}
+        <View style={styles.bottomSheetContent}>
+          {/* You can add any content you want here */}
+          <Text>This is your bottom sheet content.</Text>
+          <TouchableOpacity onPress={closeBottomSheet}>
+            <Text>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </SafeAreaView>
   )
 }

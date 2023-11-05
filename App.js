@@ -1,7 +1,7 @@
 
 import { StyleSheet, Text, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { OnBording, Search,Recomended, Detalies, BestOf, List, ListSearch, DeataliesList, TopBookings, CategoryDetails, Category, AuthTopTab ,Booking,Booked, Sucess} from "./screens";
+import { OnBording, Search,Recomended, Detalies, BestOf, List, ListSearch, DeataliesList, TopBookings, CategoryDetails, Category, AuthTopTab ,Booking,Booked, Sucess, Rooms, ChatMessage} from "./screens";
 import { NavigationContainer } from "@react-navigation/native";
 import Navigation from "./screens/Navigation";
 import Header from "./components/Header";
@@ -97,6 +97,16 @@ export default function App() {
           name="BottomSheet"
           component={BottomSheet}
           options={{ headerShown: false }}
+        />
+          <Stack.Screen
+          name="Rooms"
+          component={Rooms}
+          options={{ headerShown: false }}
+        />
+           <Stack.Screen
+          name="ChatMessage"
+          component={ChatMessage}
+          // options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
