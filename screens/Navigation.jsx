@@ -18,7 +18,7 @@ const tabBarStyle = {
 };
 const Navigation = () => {
   return (
-    <Tab.Navigator initialRouteName="Home"
+    <Tab.Navigator initialRouteName="AuthTopTab"
     activeColor="#EB6A58"
     tabBarHideKeyBoard={true}
     headerShown={false}
@@ -61,6 +61,7 @@ const Navigation = () => {
      {{tabBarStyle:tabBarStyle,
     tabBarShowLabel:false,
     headerShown:false,
+    // tabBarVisible: false,
     tabBarIcon:({focused})=>(
         <Ionicons
         name={focused?"location":"location-outline"}

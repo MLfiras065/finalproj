@@ -1,63 +1,90 @@
 import { StyleSheet,View, Text, TextInput, Button} from 'react-native'
-import React from 'react'
-import { Formik } from 'formik'
+import axios from "axios";
+import React, { useEffect, useState,useContext } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-const Login = () => {
+import {APP_API_URL} from "../env"
+import UserProvider,{useUser} from '../components/Context';
+
+const Login = ({navigation}) => {
+  const { setUser } = useUser()
+  const [email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const logIn = async( ) => {
+
+   
+      try {
+        const res= await axios.post(`https://04c1-41-225-173-210.ngrok.io/api/user/log/${email}`, {
+        Password:Password
+      })
+      const userId = res.data.id;
+      setUser(userId,res.data.email);
+  console.log("userId===>",userId);
+        alert("login")
+        
+console.log("loggedin",res.data.id);
+
+        } catch (err) {
+        console.error(err)
+      }
+     
+  };
+  
+  const handleLogIn = () => {
+    logIn();
+
+    navigation.navigate("Home",{screen:"Home"})
+   
+  };
   return (
+    <UserProvider>
     <View style={styles.container}>
-        <Formik
-      initialValues={{email:"",password:""}}
-      // validationSchema={validationSchema}
-      onsubmit={(value)=>{}}
-      >
-          {({ handleChange, touched,handleSubmit, values }) => (
-             <View style={styles.wrapper}>
-             <View>
-               <Text style={styles.label}>Email</Text>
-               <View style={styles.inputWrapper(touched.email ? 'blue' : 'gray')}>
-                 <MaterialCommunityIcons
-                   name="email-outline"
-                   size={20}
-                   color={'gray'}
-                 />
-                 <View style={{ marginLeft: 5 }}>
+    <View style={styles.container}>
+
+    <View style={styles.wrapper}>
+    <View>
+      <Text style={styles.label}>Email</Text>
+      <View style={styles.inputWrapper(email ? 'blue' : 'gray')}>
+        <MaterialCommunityIcons
+          name="email-outline"
+          size={20}
+          color={'gray'}
+        />
+        <View  style={{ marginLeft: 5 }}>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+          placeholder="Email"
+        />
+      </View>
+</View>
+      <Text style={styles.label}>Password</Text>
+      <View style={styles.inputWrapper(Password ? 'blue' : 'gray')}>
+        <MaterialCommunityIcons
+          name="lock-outline"
+          size={20}
+          color={'gray'}
+        />
+              <View style={{ marginLeft: 5 }}>
                    <TextInput
-                     onChangeText={handleChange('email')}
-                     value={values.email}
-                     placeholder="Email"
-                   />
-                 </View>
-               </View>
-             </View>
- 
-             <Text style={styles.label}>Password</Text>
-             <View>
-               <View style={styles.inputWrapper(touched.password ? 'blue' : 'gray')}>
-                 <MaterialCommunityIcons
-                   name="lock-outline"
-                   size={20}
-                   color={'gray'}
-                 />
-                 <View style={{ marginLeft: 5 }}>
-                   <TextInput
-                     onChangeText={handleChange('password')}
-                     value={values.password}
+                     onChangeText={(pass)=>setPassword(pass)}
+                     value={Password}
                      placeholder="Password"
                      secureTextEntry
                    />
                  </View>
-               </View>
-             </View>
-             <View  style={{marginTop:20}}>
-             <Button title="Login" onPress={handleSubmit}
+      </View>
+
+      <View  style={{marginTop:20}}>
+             <Button title="Login" onPress={handleLogIn}
               style={{marginTop:20,borderRadius:12,borderWidth:1}} />
 
              </View>
-          </View>
-             )}
-       
-      </Formik>
     </View>
+    </View>
+    </View>
+    </View>
+    </UserProvider>
   )
 }
 

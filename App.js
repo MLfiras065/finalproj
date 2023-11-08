@@ -7,10 +7,11 @@ import Navigation from "./screens/Navigation";
 import Header from "./components/Header";
 import TopTab from "./screens/TopTab";
 import BottomSheet from "./screens/BottomSheet";
-
+import UserProvider from "./components/Context";
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
+    <UserProvider>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
@@ -110,5 +111,7 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </UserProvider>
+
   );
 }

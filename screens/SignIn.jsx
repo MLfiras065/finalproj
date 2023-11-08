@@ -1,25 +1,136 @@
-import { StyleSheet,View, Text, TextInput, Button} from 'react-native'
-import React from 'react'
+import { StyleSheet,View, Text, TextInput, Button,Image, ScrollView ,TouchableOpacity} from 'react-native'
+import React ,{useState,}from 'react'
 import { Formik } from 'formik'
+import {APP_API_URL} from "../env"
+import axios from 'axios'
+import * as ImagePicker from 'expo-image-picker';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 const SignIn = () => {
   const navigation = useNavigation()
+  const [image, setImage] = useState("");
+  const [coverimage, setCoverImage] = useState("");
+  const [FirstName, setFirstName] = useState("");
+  const [LastName, setLastName] = useState("");
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [gender, setGender] = useState("");
+  const [DateOfBirth, setDateOfBirth] = useState("");
+  const [bio, setBio] = useState("");
+
+  const SignUp = (
+    image,
+    coverimage,
+    FirstName,
+    LastName,
+    username,
+    email,
+    Password,
+    gender,
+    DateOfBirth,
+    bio
+  ) => {
+    axios
+      .post(`https://04c1-41-225-173-210.ngrok.io/user/reg`, {
+        image: image,
+        coverimage: coverimage,
+        FirstName: FirstName,
+        LastName: LastName,
+        username: username,
+        email: email,
+        Password: Password,
+        gender: gender,
+        DateOfBirth: DateOfBirth,
+        bio: bio,
+      })
+      .then((res) => {
+        alert("signup");
+        console.log("sign", res.data);
+      })
+      .catch((error) => {
+        console.log( error.message);
+      });
+  };
+
+
+
+
+  const handleSignup = () => {
+    SignUp(
+      image,
+      coverimage,
+      FirstName,
+      LastName,
+      username,
+      email,
+      Password,
+      gender,
+      DateOfBirth,
+      bio
+    );
+  };
+
+    const pickImage = async () => {
+  
+     let result = await ImagePicker.launchImageLibraryAsync({
+       mediaTypes: ImagePicker.MediaTypeOptions.All,
+       allowsEditing: true,
+       aspect: [4, 3],
+       quality: 1,
+     });
+
+     console.log(result);
+
+     if (!result.canceled) {
+       setImage(result.assets[0].uri);
+     }
+   };
+  const uploadeImage = async () => {
+    const resp = await fetch(image.uri)
+    const blob = await resp.blob()
+    const filename = image.uri.substring(image.uri.lastIndexOf("/") + 1)
+    var ref = storage.storage().ref().child(filename).put(blob)
+    try {
+      await ref
+    }
+    catch (err) {
+      console.log(err);
+    }
+    alert("upload")
+    setImage(null)
+  }
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       tabBarVisible: false, 
     });
   }, [navigation]);
   return (
-    <View style={styles.container}>
+    <ScrollView
+    style={[{ flex: 1, backgroundColor: "#F0F0F0" }, styles.container]}
+
+    behavior={Platform.OS === "ios" ? "position" : null} 
+    keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
+    
+  >
       <Formik
       initialValues={{username:"",email:"",password:""}}
     
-      onsubmit={(value)=>{}}
+      onSubmit={(value)=>{handleSignup(value),console.log(value);}}
       >
           {({ handleChange, touched,handleSubmit, values }) => (
              <View style={styles.wrapper}>
+             <View>
+   <TouchableOpacity onPress={pickImage}>
+            <Image 
+source={{ uri: 'https://c4.wallpaperflare.com/wallpaper/365/244/884/uchiha-itachi-naruto-shippuuden-anbu-silhouette-wallpaper-preview.jpg' }}
+style={styles.profimges} 
+
+/>
+</TouchableOpacity> 
+             </View>
              <View>
                <Text style={styles.label}>Username</Text>
                <View style={styles.inputWrapper(touched.email ? 'blue' : 'gray')}>
@@ -77,7 +188,7 @@ const SignIn = () => {
              )}
        
       </Formik>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -110,5 +221,14 @@ alignItems:"center"
     marginBottom:4,
     marginEnd:4, 
     textAlign:"left"
-  }
+  },profimges:{
+    resizeMode:"cover",
+    width:100,
+    height:100,
+    borderColor:"white",
+    borderWidth:2,
+    borderRadius:90,
+   
+
+},
 })
