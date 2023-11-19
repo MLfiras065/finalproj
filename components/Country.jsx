@@ -4,7 +4,7 @@ import ReausbleText from './ReausbleText'
 import ResImage from './ResImage'
 import {useNavigation} from "@react-navigation/native"
 const Country = ({item}) => {
-  // const [postImage,setPostImage]=useState('')
+ 
     const navigation=useNavigation()
     console.log(item.postImage);
     if (!item || !item.postImage) {
@@ -14,7 +14,7 @@ const Country = ({item}) => {
     }
   return (
   <TouchableOpacity  
-  onPress={()=>navigation.navigate('CategoryDetails',item)}
+  onPress={()=>navigation.navigate('CategoryDetails',{item:item})}
   style={{marginTop:6}}>
     <View>
         <ResImage  source={item.postImage}

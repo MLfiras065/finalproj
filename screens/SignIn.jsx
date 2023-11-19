@@ -33,7 +33,7 @@ const SignIn = () => {
     bio
   ) => {
     axios
-      .post(`https://04c1-41-225-173-210.ngrok.io/user/reg`, {
+      .post(`${APP_API_URL}/user/reg`, {
         image: image,
         coverimage: coverimage,
         FirstName: FirstName,

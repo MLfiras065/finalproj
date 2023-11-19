@@ -60,7 +60,7 @@ const BestOf = () => {
      size={22}
      color={"gray"}
      />
-     <TouchableOpacity onPress={()=>{navigation.navigate('List')}}>
+     <TouchableOpacity onPress={()=>{navigation.navigate('Booking')}}>
        <Feather name='list' size={20}/>
        </TouchableOpacity> 
     </View>

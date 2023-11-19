@@ -7,8 +7,15 @@ import TopTrips from './TopTrips';
 import ResImage from '../components/ResImage';
 import Header from '../components/Header';
 import ReausbleText from '../components/ReausbleText';
+import { useUser } from '../components/Context';
+
 const Tab = createMaterialTopTabNavigator();
-const TopTab = () => {
+const TopTab = ({navigation}) => {
+  const {setUser}=useUser()
+  const handelLogout=()=>{
+    setUser(null)
+    navigation.navigate('Login')
+  }
   return (
     <View style={{flex:1}}>
 <View style={{backgroundColor:"white"}}>
@@ -22,7 +29,7 @@ const TopTab = () => {
     <Header
     color={"white"}
     
-    onPress1={()=>{}}
+    onPress1={handelLogout}
     icon={"logout"}
     />
 <View style={styles.img}>
@@ -54,7 +61,7 @@ source={{ uri: 'https://c4.wallpaperflare.com/wallpaper/365/244/884/uchiha-itach
 </View>
 </View>
     <Tab.Navigator>
-    <Tab.Screen name="Top Bookings" component={TopBookings} />
+    <Tab.Screen name="wish list" component={TopBookings} />
     <Tab.Screen name="Top Trips" component={TopTrips} />
     <Tab.Screen name="Info" component={TopInfo} />
   </Tab.Navigator>

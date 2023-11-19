@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from '@expo/vector-icons';
 
 const TopInfo = () => {
+  
   return (
     <View style={styles.container}>
       <Formik

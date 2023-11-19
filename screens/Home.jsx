@@ -24,7 +24,7 @@ console.log("posts=>",post);
   const getPost = () => {
 
     axios
-      .get("https://04c1-41-225-173-210.ngrok.io/api/post/get")
+      .get(`${APP_API_URL}/post/get`)
       .then((res) => {
        
         setPost(res.data);
@@ -33,6 +33,14 @@ console.log("posts=>",post);
       .catch((err) => {
         console.log("errmsg",err);
       });
+  };
+  const handleNewPost = (newPost) => {
+    setPost([...post, newPost]);
+  };
+  const handleAdd = async () => {
+    const newPost = await addPost(postText, postImage);
+    handleNewPost(newPost);
+    navigation.navigate('Home');
   };
   useEffect(() => {
     getPost();
@@ -49,22 +57,19 @@ console.log("posts=>",post);
     const navigation = useNavigation()
     const addPost = (postText,postImage) => {
       axios
-        .post(`https://04c1-41-225-173-210.ngrok.io/api/post/addpost/${userId}`, {
+        .post(`${APP_API_URL}/post/addpost/${userId}`, {
           postText:postText,
           postImage:postImage,
         })
         .then((res) => {
           console.log("post added succesfuly", res.data);
-          // console.log("eyyyy");
+        return  res.data
         })
         .catch((err) => {
           console.log(err);
         });
     };
-    const handleAdd = () => {
-      addPost(postImage,postText);
-      navigation.navigate('Home')
-    }
+
     const pickImage = async () => {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,

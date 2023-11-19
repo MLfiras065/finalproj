@@ -11,6 +11,7 @@ const like=require('./routes/likes.router')
 const user=require('./routes/User.router')
 const foll=require('./routes/follow.route')
 const rev=require('./routes/reviews.route')
+const pay=require('./routes/payment.route')
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 3000
@@ -26,7 +27,7 @@ app.use('/api/like',like)
 app.use('/api/user',user)
 app.use('/api/foll',foll)
 app.use('/api/rev',rev)
-
+app.use('/api/payment',pay)
 const initApp = async () => {
     console.log("Testing the database connection..");
 

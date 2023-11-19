@@ -13,7 +13,7 @@ const Login = ({navigation}) => {
 
    
       try {
-        const res= await axios.post(`https://04c1-41-225-173-210.ngrok.io/api/user/log/${email}`, {
+        const res= await axios.post(`${APP_API_URL}/user/log/${email}`, {
         Password:Password
       })
       const userId = res.data.id;
