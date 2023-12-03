@@ -1,25 +1,78 @@
-import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View,TouchableOpacity ,Alert} from 'react-native'
+import React,{useEffect, useState} from 'react'
 import {  useRoute} from "@react-navigation/native";
 import Header from '../components/Header';
 import ReausbleText from '../components/ReausbleText';
 import ResImage from '../components/ResImage';
 import Rating from '../components/Rating';
 import Counter from '../components/Counter';
+import  UserProvider,{useUser}from '../components/Context';
+import { useStripe } from '@stripe/stripe-react-native';
+import { APP_API_URL } from '../env';
+import axios from 'axios';
 
 const Booked = ({navigation}) => {
+  const { initPaymentSheet, presentPaymentSheet } = useStripe();
+  const { user } = useUser();
     const router=useRoute()
+    const [amount,setAmount]=useState(0)
+    const [loading, setLoading] = useState(false);
+    const userId = user.userId
     const {item}=router.params
     console.log("my item=>",item);
+ 
+    
+  const fetchPaymentSheetParams = async () => {
+    const response = await axios.post(`${APP_API_URL}/payment/${amount}` ,setAmount(amount));
+    const { paymentIntent } = response.data
+    const initResponse = initPaymentSheet({
+      merchantDisplayName: "finalproj",
+      paymentIntentClientSecret: paymentIntent,
+    });
+return initResponse
+   
+  };
+  const openPaymentSheet = async () => {
+    try {
+      const { error } = await presentPaymentSheet();
+  
+      if (error) {
+        Alert.alert(`Error code: ${error.code}`, error.message);
+        console.error('Error presenting payment sheet:', error);
+      } else {
+        
+        axios.get(`${APP_API_URL}/user/payed/${userId}`)
+          .then(() => {
+            Alert.alert(
+              "Payment Successful",
+              "Your payment has been processed successfully!"
+            );
+            navigation.navigate("Sucess");
+          })
+          .catch((error) => {
+            console.error('Error processing payment:', error);
+          });
+      }
+    } catch (error) {
+      console.error('Error presenting payment sheet:', error);
+      
+    }
+  };
+    useEffect(() => {
+    
+    fetchPaymentSheetParams()
+  }, []);
   return (
+    <UserProvider>
+
     <View>
        <View>
         <Header
           title={"Booked"}
           color={"white"}
           onPress={() => navigation.goBack()}
-        
-        />
+          
+          />
       </View>
 <View style={{marginHorizontal:20,marginTop:90}}>
     <View style={{backgroundColor:"white",borderRadius:16}}>
@@ -75,13 +128,14 @@ color={"gray"}
 
       </View>
       <TouchableOpacity 
-      onPress={()=>navigation.navigate("Sucess")}
-       style={styles.btnstyle}>
+      onPress={()=>{openPaymentSheet()}}
+      style={styles.btnstyle}>
       <Text style={styles.btntext}>book now </Text>
     </TouchableOpacity>
     </View>
 </View>
     </View>
+         </UserProvider>
   )
 }
 

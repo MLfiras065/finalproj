@@ -1,3 +1,3 @@
 
-const APP_API_URL="https://168b-197-26-32-131.ngrok.io/api"
+const APP_API_URL="https://7483-41-225-122-26.ngrok.io/api"
 export {APP_API_URL}

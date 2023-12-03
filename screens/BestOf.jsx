@@ -84,9 +84,7 @@ const BestOf = () => {
 export default BestOf
 
 const styles = StyleSheet.create({
-    // container:{
-    //     paddingTop:30
-    // },
+    
     row:{
         flexDirection:"row",
         alignItems:"center",

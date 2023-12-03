@@ -24,7 +24,7 @@ const Booking = () => {
       image:
         "https://c4.wallpaperflare.com/wallpaper/892/296/60/sea-cliff-bridge-landscape-architecture-trees-wallpaper-preview.jpg",
       rating: "5",
-    },
+      amount:5    },
     {
       id: 2,
       namee: "Tokyo",
@@ -34,6 +34,7 @@ const Booking = () => {
       image:
         "https://c4.wallpaperflare.com/wallpaper/892/296/60/sea-cliff-bridge-landscape-architecture-trees-wallpaper-preview.jpg",
       rating: "1",
+      amount:45
     },
     {
       id: 3,
@@ -44,6 +45,7 @@ const Booking = () => {
       image:
         "https://c4.wallpaperflare.com/wallpaper/892/296/60/sea-cliff-bridge-landscape-architecture-trees-wallpaper-preview.jpg",
       rating: "2",
+      amount:59
     },
     {
       id: 4,
@@ -54,6 +56,7 @@ const Booking = () => {
       image:
         "https://c4.wallpaperflare.com/wallpaper/892/296/60/sea-cliff-bridge-landscape-architecture-trees-wallpaper-preview.jpg",
       rating: "3",
+      amount:58
     },
     {
       id: 5,
@@ -64,6 +67,7 @@ const Booking = () => {
       image:
         "https://c4.wallpaperflare.com/wallpaper/892/296/60/sea-cliff-bridge-landscape-architecture-trees-wallpaper-preview.jpg",
       rating: "6",
+      amount:52
     },
   ];
   return (

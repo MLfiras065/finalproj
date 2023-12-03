@@ -27,7 +27,7 @@ app.use('/api/like',like)
 app.use('/api/user',user)
 app.use('/api/foll',foll)
 app.use('/api/rev',rev)
-app.use('/api/payment',pay)
+app.use('/api/',pay)
 const initApp = async () => {
     console.log("Testing the database connection..");
 

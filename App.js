@@ -8,9 +8,13 @@ import Header from "./components/Header";
 import TopTab from "./screens/TopTab";
 import BottomSheet from "./screens/BottomSheet";
 import UserProvider from "./components/Context";
+import { StripeProvider } from "@stripe/stripe-react-native";
+
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
+<StripeProvider publishableKey="pk_test_51O7xr1FBTzNlZioJG5eArUt9FVglGo9PSPmDI5EU7STowGqZPxZbI8FOkfGhlqX6CGiYILjvtYntdB0CtMiD7k4g00pipm25C1">
+
     <UserProvider>
     <NavigationContainer>
       <Stack.Navigator>
@@ -28,12 +32,12 @@ export default function App() {
           name="Search"
           component={Search}
           options={{ headerShown: false }}
-        />
+          />
         <Stack.Screen
           name="Recomended"
           component={Recomended}
           options={{ headerShown: false }}
-        />
+          />
         <Stack.Screen
           name="Detalies"
           component={Detalies}
@@ -88,30 +92,31 @@ export default function App() {
           name="Booked"
           component={Booked}
           options={{ headerShown: false }}
-        />
+          />
           <Stack.Screen
           name="Sucess"
           component={Sucess}
           options={{ headerShown: false }}
-        />
+          />
           <Stack.Screen
           name="BottomSheet"
           component={BottomSheet}
           options={{ headerShown: false }}
-        />
+          />
           <Stack.Screen
           name="Rooms"
           component={Rooms}
           options={{ headerShown: false }}
-        />
+          />
            <Stack.Screen
           name="ChatMessage"
           component={ChatMessage}
           // options={{ headerShown: false }}
-        />
+          />
       </Stack.Navigator>
     </NavigationContainer>
     </UserProvider>
+          </StripeProvider>
 
   );
 }
