@@ -1,5 +1,5 @@
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React ,{useEffect}from 'react'
 import Header from '../components/Header'
 import ReausbleTile from '../components/ReausbleTile';
 

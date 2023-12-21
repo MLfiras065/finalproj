@@ -30,6 +30,7 @@
     "express": "^4.18.2",
     "formik": "^2.4.5",
     "jsonwebtoken": "^9.0.2",
+    "ngrok": "^5.0.0-beta.2",
     "nodemon": "^3.0.1",
     "react": "18.2.0",
     "react-native": "0.72.6",
@@ -44,6 +45,7 @@
     "react-native-tab-view": "^3.5.2",
     "react-native-vector-icons": "^10.0.1",
     "sessionstorage": "^0.1.0",
+    "socket.io-client": "^4.7.2",
     "stripe": "^14.5.0"
   },
   "devDependencies": {

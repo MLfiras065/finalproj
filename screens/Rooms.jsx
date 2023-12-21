@@ -1,13 +1,39 @@
 import { Image,TouchableOpacity,StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React,{useEffect} from "react";
 import {  useNavigation} from "@react-navigation/native";
 const Rooms = ({ item }) => {
     const navigation=useNavigation()
+    // const navigation = useNavigation();
+    console.log("testitem",item);
+   
+    const handleNavigation = () => {
+        navigation.navigate("chatMessage", {
+            userid: item.theFollowedUserid,
+            
+        });
+    };
+    const handleCreateRoom = () => {
+        socket.emit("createRoom", "test");
+    };
+   
+    let socket;
+    console.log(socket, "socketttttt");
+    
+    useEffect(() => {
+      try {
+        socket = io("http://192.168.1.12:4000");
+        console.log("socket=>", socket);
+      } catch (error) {
+        console.log(error);
+      }
+      console.log('hi');
+    }, []);
+    
   return (
     <View>
 
     <TouchableOpacity style={styles.container}
-onPress={()=>{navigation.navigate('ChatMessage')}}
+onPress={()=>{handleCreateRoom(),handleNavigation()}}
     >
       <Image style={styles.img} source={{uri:item.image}} />
       <View>

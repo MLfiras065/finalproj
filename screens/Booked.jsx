@@ -15,7 +15,7 @@ const Booked = ({navigation}) => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const { user } = useUser();
     const router=useRoute()
-    const [amount,setAmount]=useState(0)
+  
     const [loading, setLoading] = useState(false);
     const userId = user.userId
     const {item}=router.params
@@ -23,7 +23,7 @@ const Booked = ({navigation}) => {
  
     
   const fetchPaymentSheetParams = async () => {
-    const response = await axios.post(`${APP_API_URL}/payment/${amount}` ,setAmount(amount));
+    const response = await axios.post(`${APP_API_URL}/payment/${222}` );
     const { paymentIntent } = response.data
     const initResponse = initPaymentSheet({
       merchantDisplayName: "finalproj",

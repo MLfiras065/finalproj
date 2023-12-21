@@ -13,39 +13,92 @@ import axios from 'axios';
 import React, { useState,useLayoutEffect, useEffect } from "react";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 import EmojiSelector from "react-native-emoji-selector";
-
+import  UserProvider,{useUser}from '../components/Context';
 
 const ChatMessage = ({navigation}) => {
-    const msg=[{
-        id:1,
-        messa:"helllo",
-    }]
+  const { user } = useUser();
+  const userid = user.userId
+  const [socket, setSocket] = useState(null);
+
     const [messageText, setMessageText] = useState([]);
   const [showEmoji, setShowEmoji] = useState(false);
   const [message, setMessage] = useState("");
   const emojiSelec = () => {
     setShowEmoji(!showEmoji);
   };
-  const handleSendMessage = () => {
-    if (messageText) {
-      const newMessage = {
-        text:message,
-       
-        timestamp: new Date(),
-      };
+  const getMessage=()=> {
+    
+    axios.get(`${APP_API_URL}/message/getm/${userid}/${22}`).then((res)=>{
+        setChatMessages(res.data)
+        console.log("res=>",res.data);
+    }).catch((err)=>{console.log(err)
+    })
+}
 
-     
-      setMessageText([...messageText, newMessage]);
+const addsMessage=(content)=>{
+    console.log(socket,"socket");
+    socket.emit("get-users", content)
+    let x=socket.emit('get-users',content)
+    console.log("x=>",x);
+axios.post(`${APP_API_URL}/message/postMsg/${userid}/${param}`,{
+content:content,
+})
+.then((res)=>{
+    setMessageText(res.data)
 
-      setMessage('');
+})
+.catch((err)=>{
+console.log(err);
+})
+}
+const handleAdd=()=>{
+    addsMessage(content)
+}
+
+const handleNewMessage = () => {
+    const hour =
+        new Date().getHours() < 10
+            ? `0${new Date().getHours()}`
+            : `${new Date().getHours()}`;
+
+    const mins =
+        new Date().getMinutes() < 10
+            ? `0${new Date().getMinutes()}`
+            : `${new Date().getMinutes()}`;
+
+    console.log({
+        message,
+    
+        timestamp: { hour, mins },
+    });
+};
+
+
+
+
+
+
+useEffect(() => {
+  const socketConnection = io("https://section-bc-climb-pill.trycloudflare.com:4000");
+
+  socketConnection.on("connect", () => {
+    console.log("Socket connected.");
+    setSocket(socketConnection); 
+  });
+
+  return () => {
+    if (socketConnection) {
+      socketConnection.disconnect();
     }
   };
-  const getMessage = () => {
-    setMessageText(msg);
-  }
-  useEffect(()=>{
-    getMessage()
-  },[message])
+}, []);
+
+
+useEffect(() => {
+  getMessage();
+}, [socket, getMessage]);
+
+console.log("chatmessa",messageText)
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -148,7 +201,7 @@ const ChatMessage = ({navigation}) => {
                 borderRadius: 20,
                 marginLeft: 10,
               }}
-              onPress={handleSendMessage}
+              onPress={handleNewMessage}
             >
               <Text>send</Text>
             </TouchableOpacity>

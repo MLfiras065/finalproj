@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React,{useEffect} from 'react'
 import {useNavigation} from "@react-navigation/native"
 import ReausbleText from '../components/ReausbleText'
 import { Feather } from '@expo/vector-icons'

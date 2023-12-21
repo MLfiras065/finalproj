@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView , Modal} from 'react-native';
 
 const ListSearch = () => {
